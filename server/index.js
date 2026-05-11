@@ -1,23 +1,27 @@
-import express from "express";
-import cors from "cors";
-import BlogPosts from "./BlogPosts.js";
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const dbConnect = require("./db/dbConnect");
+const postRouter = require("./routes/PostRouter");
+console.log("PostRouter loaded");
+
 const app = express();
+const jsonParser = bodyParser.json();
 
 app.use(cors());
-app.get("/api/posts", function (req, res) {
-  res.send(JSON.stringify(BlogPosts));
-});
+app.use(jsonParser);
 
-app.get("/api/posts/:slug", function (req, res) {
-  const slug = req.params.slug;
-  const post = BlogPosts.find((e) => e.slug == slug);
-  if (post) {
-    res.send(JSON.stringify(post));
-  } else {
-    res.status(404).send("NOT FOUND");
-  }
-});
+app.use("/api", postRouter);
 
-app.listen(8080, function () {
-  console.log("Server is running on 8080");
-});
+app.use("/api", postRouter);
+
+(async () => {
+  await dbConnect();
+
+  const userRouter = require("./routes/UserRouter");
+  app.use("/api", userRouter);
+
+  app.listen(8080, () => {
+    console.log("Server listening on port 8080");
+  });
+})();
