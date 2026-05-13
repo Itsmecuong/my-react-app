@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { customFetch } from "../utils/api";
 function NewPost() {
   const [newPost, setNewPost] = useState("");
   const {
@@ -11,7 +12,7 @@ function NewPost() {
   const onSubmit = async (data) => {
     const post = JSON.stringify(data);
     try {
-      const response = await fetch("http://localhost:8080/api/post", {
+      const response = await customFetch("/post", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -25,7 +26,7 @@ function NewPost() {
       } else {
         const errData = await response.json().catch(() => ({}));
         console.error("Server error data:", errData);
-        setNewPost(`Failed: ${errData.message || 'Server error'}`);
+        setNewPost(`Failed: ${errData.message || "Server error"}`);
       }
     } catch (error) {
       console.log(error);

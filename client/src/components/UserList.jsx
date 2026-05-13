@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { customFetch } from "../utils/api";
 export default function UserList() {
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/stat/list");
+        const response = await customFetch("/stat/list");
         if (response.ok) {
           const result = await response.json();
           setData(result);

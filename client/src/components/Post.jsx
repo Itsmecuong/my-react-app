@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, Outlet, useNavigate } from "react-router-dom";
+import { customFetch } from "../utils/api";
 export default function Post() {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
@@ -9,7 +10,7 @@ export default function Post() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/posts/" + slug);
+        const response = await customFetch("/posts/" + slug);
         if (response.ok) {
           const result = await response.json();
           setPost(result);
@@ -37,7 +38,7 @@ export default function Post() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ comment: comment }),
-        },
+        }
       );
       if (response.ok) {
         const result = await response.json();
@@ -62,7 +63,7 @@ export default function Post() {
           `http://localhost:8080/api/posts/${slug}`,
           {
             method: "delete",
-          },
+          }
         );
         if (response.ok) {
           alert("Xoa thanh cong");

@@ -1,0 +1,28 @@
+{
+    "setupTasks": [
+      {
+        "name": "Install Backend",
+        "directory": "server",
+        "command": "npm install"
+      },
+      {
+        "name": "Install Frontend",
+        "directory": "client",
+        "command": "npm install"
+      }
+    ],
+    "tasks": {
+      "node-server": {
+        "name": "Run Backend",
+        "directory": "server",
+        "command": "npm start",
+        "runAtStart": true
+      },
+      "vite-client": {
+        "name": "Run Frontend",
+        "directory": "client",
+        "command": "npm run dev",
+        "runAtStart": true
+      }
+    }
+  }

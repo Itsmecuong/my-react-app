@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import { customFetch } from "../utils/api";
 function Login({ onLogin }) {
   const [error, setError] = useState();
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ function Login({ onLogin }) {
   const handleLogin = async (data) => {
     console.log("1. Dữ liệu sắp gửi đi:", data);
     try {
-      const response = await fetch("http://localhost:8080/api/login", {
+      const response = await customFetch("/login", {
         method: "post",
         headers: {
           accept: "application/json",

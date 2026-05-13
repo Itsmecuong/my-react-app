@@ -5,7 +5,7 @@ function Stat() {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/posts");
+        const response = await customFetch("/posts");
         const posts = await response.json();
         if (posts) {
           setTotal(posts.length);

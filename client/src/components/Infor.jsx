@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-
+import { customFetch } from "../utils/api";
 export default function Infor() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/about/form");
+        const response = await customFetch("/about/form");
         if (response.ok) {
           const result = await response.json();
           setData(result);
