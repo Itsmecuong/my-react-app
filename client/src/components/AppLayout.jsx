@@ -15,6 +15,9 @@ import ProtectedRoute from "./ProtectedRoute";
 import Register from "./Register";
 import UserList from "./UserList";
 import UpdatePost from "./UpdatePost";
+import News from "./News";
+import NewList from "./NewList";
+import New from "./New";
 export default function AppLayout() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -28,6 +31,9 @@ export default function AppLayout() {
       <nav style={{ margin: 10 }}>
         <Link to="/" style={{ padding: 5 }}>
           Home
+        </Link>
+        <Link to="/news" style={{ padding: 5 }}>
+          News
         </Link>
         <Link to="/posts" style={{ padding: 5 }}>
           Posts
@@ -60,7 +66,18 @@ export default function AppLayout() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/posts" element={<Posts />}>
+        <Route path="/news" element={<News />}>
+          <Route index element={<NewList />} />
+          <Route path=":id" element={<New />} />
+        </Route>
+        <Route
+          path="/posts"
+          element={
+            <ProtectedRoute user={user}>
+              <Posts />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<PostList />} />
           <Route path=":slug" element={<Post />}>
             <Route path="update" element={<UpdatePost />} />
