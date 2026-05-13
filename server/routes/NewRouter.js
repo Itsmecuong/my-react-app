@@ -12,6 +12,7 @@ router.get("/news", async (request, response) => {
     }
   } catch (error) {
     response.status(500).send({ error });
+    console.log("Loi be");
   }
 });
 router.get("/news/:id", async (request, response) => {

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { customFetch } from "../utils/api";
 export default function NewList() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/news");
+        const response = await customFetch("/news");
         if (response.ok) {
           const result = await response.json();
           setData(result);
