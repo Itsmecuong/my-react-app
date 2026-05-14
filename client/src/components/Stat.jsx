@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, Outlet } from "react-router-dom";
+import API_BASE_URL from "../api/config";
 function Stat() {
   const [total, setTotal] = useState("");
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/posts");
+        const response = await fetch(`${API_BASE_URL}/api/posts`);
         const posts = await response.json();
         if (posts) {
           setTotal(posts.length);

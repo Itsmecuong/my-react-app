@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import API_BASE_URL from "../api/config";
 export default function UpdatePost() {
   const { slug } = useParams();
   const {
@@ -12,7 +13,7 @@ export default function UpdatePost() {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/posts/" + slug);
+        const response = await fetch(`${API_BASE_URL}/api/posts/` + slug);
         if (response.ok) {
           const post = await response.json();
           setValue("slug", post.slug);
@@ -28,7 +29,7 @@ export default function UpdatePost() {
     fetchdata();
   }, []);
   const onSubmit = async (data) => {
-    const response = await fetch("http://localhost:8080/api/posts/" + slug, {
+    const response = await fetch(`${API_BASE_URL}/api/posts/` + slug, {
       method: "PATCH",
       headers: {
         Accept: "application/json",

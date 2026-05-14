@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import API_BASE_URL from "../api/config";
 
 export default function Infor() {
   const [data, setData] = useState([]);
@@ -6,7 +7,7 @@ export default function Infor() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/about/form");
+        const response = await fetch(`${API_BASE_URL}/api/about/form`);
         if (response.ok) {
           const result = await response.json();
           setData(result);

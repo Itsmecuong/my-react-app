@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, Outlet, useNavigate } from "react-router-dom";
+import API_BASE_URL from "../api/config";
 export default function Post() {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
@@ -9,7 +10,7 @@ export default function Post() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/posts/" + slug);
+        const response = await fetch(`${API_BASE_URL}/api/posts/` + slug);
         if (response.ok) {
           const result = await response.json();
           setPost(result);
@@ -29,7 +30,7 @@ export default function Post() {
   const handleAddComment = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/posts/${slug}/comments`,
+        `${API_BASE_URL}/api/posts/${slug}/comments`,
         {
           method: "POST",
           headers: {
@@ -59,7 +60,7 @@ export default function Post() {
     if (window.confirm("Ban co chac chan muon xoa khong?")) {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/posts/${slug}`,
+          `${API_BASE_URL}/api/posts/${slug}`,
           {
             method: "delete",
           },

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import API_BASE_URL from "../api/config";
 
 export default function PostList() {
   const [data, setData] = useState([]);
@@ -7,7 +8,7 @@ export default function PostList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/posts");
+        const response = await fetch(`${API_BASE_URL}/api/posts`);
         if (response.ok) {
           const result = await response.json();
           setData(result);

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../api/config";
 
 export default function Register() {
   const [message, setMessage] = useState("");
@@ -13,7 +14,7 @@ export default function Register() {
   } = useForm();
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:8080/api/register", {
+      const response = await fetch(`${API_BASE_URL}/api/register`, {
         method: "POST",
         headers: {
           Accept: "application/json",

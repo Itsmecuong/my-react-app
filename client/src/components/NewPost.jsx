@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import API_BASE_URL from "../api/config";
 function NewPost() {
   const [newPost, setNewPost] = useState("");
   const {
@@ -11,7 +12,7 @@ function NewPost() {
   const onSubmit = async (data) => {
     const post = JSON.stringify(data);
     try {
-      const response = await fetch("http://localhost:8080/api/post", {
+      const response = await fetch(`${API_BASE_URL}/api/post`, {
         method: "POST",
         headers: {
           Accept: "application/json",

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import API_BASE_URL from "../api/config";
 export default function UserList() {
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/stat/list");
+        const response = await fetch(`${API_BASE_URL}/api/stat/list`);
         if (response.ok) {
           const result = await response.json();
           setData(result);
